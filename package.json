@@ -4,5 +4,9 @@
   "engines": {
     "atom": "*",
     "node": "*"
-  }
+  },
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/Unkn03nUser/Atom-Overwatch-Workshop-Script.git"
+}
 }
