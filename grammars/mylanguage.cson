@@ -1,0 +1,89 @@
+name : 'Overwatch-Workshop-Script'
+scopeName: 'Overwatch-Workshop-Script'
+type : 'tree-sitter'
+parser: 'tree-sitter-Overwatch-Workshop-Script'
+fileTypes : 'ows'
+
+folds: [
+  {
+    type: ['comment', 'preproc_arg']
+  }
+  {
+    type: ['preproc_if', 'preproc_ifdef', 'preproc_elif'],
+    end: {type: ['preproc_else', 'preproc_elif']}
+  }
+  {
+    type: ['preproc_if', 'preproc_ifdef'],
+    end: {index: -1}
+  }
+  {
+    type: ['preproc_else', 'preproc_elif']
+    start: {index: 0}
+  }
+  {
+    type: [
+      'enumerator_list'
+      'compound_statement'
+      'declaration_list'
+      'field_declaration_list'
+      'parameter_list'
+      'argument_list'
+      'initializer_list'
+      'parenthesized_expression'
+      'template_parameter_list'
+      'template_argument_list'
+    ]
+    start: {index: 0}
+    end: {index: -1}
+  }
+  {
+    type: 'case_statement'
+    start: {index: 0}
+    end: {type: 'break_statement', index: -1}
+  }
+  {
+    type: 'case_statement'
+    start: {index: 0}
+  }
+]
+
+scopes:
+  'translation_unit': 'Overwatch-Workshop-Script'
+  'comment': 'comment.block'
+
+  'identifier': [
+    {match: '^[A-Z\\d_]+$', scopes: 'constant.other'}
+  ]
+
+  'translation_unit': 'Overwatch-Workshop-Script'
+  'comment': 'comment.block'
+
+  'rule': 'keyword.control.directive'
+  'conditions': 'keyword.control.directive'
+  'event': 'keyword.control.directive'
+
+  '"("': 'punctuation.section.parens.begin.bracket.round'
+  '")"': 'punctuation.section.parens.end.bracket.round'
+  '";"': 'punctuation.terminator.statement'
+  '","': 'punctuation.separator.delimiter'
+  '"{"': 'punctuation.section.block.begin.bracket.curly'
+  '"}"': 'punctuation.section.block.end.bracket.curly'
+
+  '"if"': 'keyword.control'
+  '"else"': 'keyword.control'
+  '"do"': 'keyword.control'
+  '"for"': 'keyword.control'
+  '"while"': 'keyword.control'
+  '"break"': 'keyword.control'
+  '"continue"': 'keyword.control'
+
+  'null': 'constant.language.null'
+  'true': 'constant.language.boolean'
+  'false': 'constant.language.boolean'
+
+  '"!="': 'keyword.operator'
+  '"<"': 'keyword.operator'
+  '">"': 'keyword.operator'
+  '">="': 'keyword.operator'
+  '"<="': 'keyword.operator'
+  '"=="': 'keyword.operator'
